@@ -53,7 +53,9 @@ A registration form validated by the browser wherever possible: `required`,
 `minlength`, `type="email"`, and `pattern="03[0-9]{9}"` on the phone field.
 JavaScript adds three custom rules with `setCustomValidity()`: the password
 must contain a digit, the confirmation must match, and the date of birth
-must make the student at least 16. A live message under the Phone field
+must make the student at least 16. A live password-strength meter
+(Weak / Medium / Strong, from Sir's validation demo, rewritten with
+`addEventListener`) updates under the password field while typing. A live message under the Phone field
 uses the `input` event and the `validity` object (`valueMissing`,
 `patternMismatch`, `valid`). Bootstrap's `was-validated` class is added
 after the first submit attempt, a checkbox toggles password visibility, and
@@ -99,6 +101,50 @@ edit.
 | Destructuring, template literals, arrow functions, ternary | Card rendering, summaries, status |
 | Dynamic updates without reload | All four tasks |
 
+## Output Screenshots
+
+### Task 1 — Interactive Course Planner
+
+![Task 1 output](screenshots/task1-course-planner.png)
+
+Three courses added, "Web Development" marked completed (strike-through),
+"Artificial Intelligence" highlighted as the longest name, and the red
+duplicate error after adding "web development" again (case-insensitive
+check). Counters: Total 3, Completed 1, Remaining 2.
+
+### Task 2 — Live Student ID Card Generator
+
+![Task 2 output](screenshots/task2-id-card.png)
+
+The card updates live: green background from the color select, CGPA badge
+shown after checking the box, character counter at "Characters left: 20",
+and the read-only summary textarea.
+
+### Task 3 — Course Registration Form
+
+![Task 3 validation](screenshots/task3-validation-errors.png)
+
+Submitting an empty form: the browser blocks it ("Please fill out this
+field") and every field shows its red message, including the live phone
+message "Phone must look like 03001234567."
+
+![Task 3 success](screenshots/task3-success.png)
+
+Valid submission: green "Registration Successful" card with all values —
+the password is never shown — and the form is reset.
+
+### Task 4 — Student Management Dashboard
+
+![Task 4 dashboard](screenshots/task4-dashboard.png)
+
+Initial state: 6 students, 2.88 average CGPA, 3.80 highest (Sara Ahmed),
+1 Academic Warning, with search, department filter, and CGPA sort.
+
+![Task 4 after delete](screenshots/task4-after-delete.png)
+
+After deleting Ayesha Noor: 6 students, 3.16 average, 0 warnings, and the
+yellow notice that the roll number can be registered again.
+
 ## Project Structure
 
 ```
@@ -107,6 +153,7 @@ full-stack-lab-06/
 ├── style.css        # Lab 06 demo styles + task styles (planner, ID card)
 ├── lab06.js         # Manual demos: DOM, events, validation, registration system
 ├── lab06-tasks.js   # Assignment Tasks 1–4
+├── screenshots/     # Output screenshots of the four tasks
 └── README.md
 ```
 

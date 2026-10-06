@@ -208,7 +208,35 @@ cfPassword.addEventListener("input", () => {
   } else {
     cfPassword.setCustomValidity("");
   }
+  cfPasswordStrength();
 });
+
+// Live password strength meter: Weak / Medium / Strong
+function cfPasswordStrength() {
+  const value = cfPassword.value;
+  const box = document.getElementById("cfStrength");
+
+  const weak = /[a-z]/;
+  const medium = /(?=.*[A-Z])(?=.*[0-9])/;
+  const strong = /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+
+  if (value.length === 0) {
+    box.textContent = "";
+    return;
+  }
+  if (strong.test(value)) {
+    box.textContent = "Strong";
+    box.style.color = "green";
+  } else if (medium.test(value)) {
+    box.textContent = "Medium";
+    box.style.color = "orange";
+  } else if (weak.test(value)) {
+    box.textContent = "Weak";
+    box.style.color = "red";
+  } else {
+    box.textContent = "";
+  }
+}
 
 // Custom rule: both passwords must match
 function cfCheckMatch() {
